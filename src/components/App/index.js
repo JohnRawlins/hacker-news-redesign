@@ -1,3 +1,4 @@
+import SearchField from "../SearchField";
 import "./styles.scss";
 
 function App() {
@@ -6,6 +7,7 @@ function App() {
       <div className="hero">
         <div className="hero-content">
           <h1 className="hero-content__title">Hacker News</h1>
+          <SearchField />
         </div>
       </div>
     </div>
