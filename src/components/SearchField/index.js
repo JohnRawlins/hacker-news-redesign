@@ -1,16 +1,25 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { addTermToSearchHistory } from "../../redux/actions/searchHistory";
 import searchIcon from "./assets/search-icon.svg";
 import "./styles.scss";
 
 const SearchField = () => {
+  const dispatch = useDispatch();
   const [searchFieldInput, setSearchFieldInput] = useState("");
 
   const handleChange = (event) => {
     setSearchFieldInput(event.target.value);
   };
 
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    if (searchFieldInput === "") return;
+    else dispatch(addTermToSearchHistory(searchFieldInput));
+  };
+
   return (
-    <form className="search-field">
+    <form className="search-field" onSubmit={handleSubmit}>
       <input
         className="search-field__input"
         type="text"

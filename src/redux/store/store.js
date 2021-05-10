@@ -1,10 +1,10 @@
 import { createStore, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
-import searchHistory from "../reducers/searchHistory";
+import searchHistoryReducer from "../reducers/searchHistory";
 import { composeWithDevTools } from "redux-devtools-extension";
 
 const store = createStore(
-  searchHistory,
+  searchHistoryReducer,
   composeWithDevTools(applyMiddleware(thunk))
 );
 
