@@ -1,0 +1,30 @@
+$orange-overlay: rgba(255, 115, 22, 0.92);
+$white: white;
+
+.app {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.hero {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-self: center;
+  padding: 40px;
+  min-height: 300px;
+  height: calc(100vh / 2.5);
+  max-height: 360px;
+  width: 75%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-image: linear-gradient(to right, $orange-overlay, $orange-overlay),
+    url(./assets/news-background.jpg);
+}
+
+.hero-content {
+  &__title {
+    color: $white;
+  }
+}
