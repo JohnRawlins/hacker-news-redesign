@@ -26,6 +26,7 @@ $light-gray: #737373;
   min-height: 300px;
   height: calc(100vh / 2.5);
   max-height: 360px;
+  margin-bottom: 20px;
   background-size: cover;
   background-repeat: no-repeat;
   background-image: linear-gradient(to right, $orange-overlay, $orange-overlay),

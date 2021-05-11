@@ -1,0 +1,8 @@
+.story-container {
+  display: flex;
+  flex-direction: column;
+
+  .story-wrapper:not(:last-child) {
+    margin-bottom: 30px;
+  }
+}

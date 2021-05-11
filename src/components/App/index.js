@@ -2,6 +2,7 @@ import React from "react";
 import { Provider } from "react-redux";
 import store from "../../redux/store/store";
 import SearchField from "../SearchField";
+import StoryContainer from "../StoryContainer/index";
 import "./styles.scss";
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
             <SearchField />
           </div>
         </div>
+        <StoryContainer />
       </div>
     </Provider>
   );
