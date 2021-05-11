@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector, shallowEqual } from "react-redux";
 import { addTermToSearchHistory } from "../../redux/actions/search";
 import searchIcon from "./assets/search-icon.svg";
 import "./styles.scss";
@@ -7,6 +7,11 @@ import "./styles.scss";
 const SearchField = () => {
   const dispatch = useDispatch();
   const [searchFieldInput, setSearchFieldInput] = useState("");
+  const currentState = useSelector((state) => state, shallowEqual);
+
+  const isDuplicateSearchTerm = (term) => {
+    return currentState.searchHistory.includes(term.toLowerCase());
+  };
 
   const handleChange = (event) => {
     setSearchFieldInput(event.target.value);
@@ -15,7 +20,10 @@ const SearchField = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     if (searchFieldInput === "") return;
-    else dispatch(addTermToSearchHistory(searchFieldInput));
+
+    if (!isDuplicateSearchTerm(searchFieldInput)) {
+      dispatch(addTermToSearchHistory(searchFieldInput.toLowerCase()));
+    }
   };
 
   return (
