@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { addTermToSearchHistory } from "../../redux/actions/searchHistory";
+import { addTermToSearchHistory } from "../../redux/actions/search";
 import searchIcon from "./assets/search-icon.svg";
 import "./styles.scss";
 

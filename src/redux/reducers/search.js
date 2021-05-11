@@ -1,10 +1,10 @@
-import { ADD_TERM_TO_SEARCH_HISTORY } from "../actions/searchHistory";
+import { ADD_TERM_TO_SEARCH_HISTORY } from "../actions/search";
 
 const initialState = {
   searchHistory: [],
 };
 
-const searchHistoryReducer = (state = initialState, action) => {
+const searchReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_TERM_TO_SEARCH_HISTORY: {
       return {
@@ -17,4 +17,4 @@ const searchHistoryReducer = (state = initialState, action) => {
   }
 };
 
-export default searchHistoryReducer;
+export default searchReducer;
