@@ -21,7 +21,7 @@ export const searchForStories = (userQuery) => {
   return async (dispatch) => {
     try {
       const storySearchResponse = await axios.get(
-        `http://hn.algolia.com/api/v1/search?query=${userQuery}`
+        `http://hn.algolia.com/api/v1/search?query=${userQuery}&tags=story`
       );
       const {
         data: { hits, query },
