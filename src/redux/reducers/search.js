@@ -1,8 +1,10 @@
 import { ADD_TERM_TO_SEARCH_HISTORY } from "../actions/search";
 import { SET_SEARCH_FORM_SUBMISSION } from "../actions/search";
+import { SEARCH_FOR_STORIES } from "../actions/search";
 
 const initialState = {
   searchHistory: [],
+  searchResults: null,
   isSearchFormSubmitted: false,
 };
 
@@ -19,6 +21,13 @@ const searchReducer = (state = initialState, action) => {
       return {
         ...state,
         isSearchFormSubmitted: action.payload,
+      };
+    }
+
+    case SEARCH_FOR_STORIES: {
+      return {
+        ...state,
+        searchResults: action.payload,
       };
     }
 

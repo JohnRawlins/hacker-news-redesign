@@ -34,6 +34,7 @@ const SearchField = () => {
       );
     }
     dispatch(searchActions.setSearchFormSubmission(true));
+    dispatch(searchActions.searchForStories(searchFieldInput));
   };
 
   return (
