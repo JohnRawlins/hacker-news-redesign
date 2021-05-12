@@ -1,8 +1,8 @@
 import React from "react";
 import "./styles.scss";
 
-const SearchTerm = () => {
-  return <li className="search-term"></li>;
+const SearchTerm = ({ searchTerm }) => {
+  return <li className="search-term">{searchTerm}</li>;
 };
 
 export default SearchTerm;

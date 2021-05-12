@@ -1,29 +1,39 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector, shallowEqual } from "react-redux";
-import { addTermToSearchHistory } from "../../redux/actions/search";
+import * as searchActions from "../../redux/actions/search";
+import SearchHistoryContainer from "../SearchHistoryContainer";
 import searchIcon from "./assets/search-icon.svg";
 import "./styles.scss";
 
 const SearchField = () => {
   const dispatch = useDispatch();
   const [searchFieldInput, setSearchFieldInput] = useState("");
-  const currentState = useSelector((state) => state, shallowEqual);
+  const { searchHistory, isSearchFormSubmitted } = useSelector(
+    (state) => state,
+    shallowEqual
+  );
 
   const isDuplicateSearchTerm = (term) => {
-    return currentState.searchHistory.includes(term.toLowerCase());
+    return searchHistory.includes(term.toLowerCase());
   };
 
   const handleChange = (event) => {
-    setSearchFieldInput(event.target.value);
+    if (isSearchFormSubmitted) {
+      dispatch(searchActions.setSearchFormSubmission(false));
+    }
+    const userInput = event.target.value;
+    setSearchFieldInput(userInput);
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
     if (searchFieldInput === "") return;
-
     if (!isDuplicateSearchTerm(searchFieldInput)) {
-      dispatch(addTermToSearchHistory(searchFieldInput.toLowerCase()));
+      dispatch(
+        searchActions.addTermToSearchHistory(searchFieldInput.toLowerCase())
+      );
     }
+    dispatch(searchActions.setSearchFormSubmission(true));
   };
 
   return (
@@ -44,6 +54,7 @@ const SearchField = () => {
           />
         </button>
       </div>
+      <SearchHistoryContainer userInput={searchFieldInput} />
     </form>
   );
 };
