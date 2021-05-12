@@ -4,7 +4,7 @@ import { SEARCH_FOR_STORIES } from "../actions/search";
 
 const initialState = {
   searchHistory: [],
-  searchResults: null,
+  searchResults: {},
   isSearchFormSubmitted: false,
 };
 

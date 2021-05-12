@@ -23,14 +23,30 @@ export const searchForStories = (userQuery) => {
       const storySearchResponse = await axios.get(
         `http://hn.algolia.com/api/v1/search?query=${userQuery}`
       );
-      dispatch({
-        type: SEARCH_FOR_STORIES,
-        payload: { ...storySearchResponse.data, success: true },
-      });
+      const {
+        data: { hits, query },
+      } = storySearchResponse;
+
+      if (hits.length > 0) {
+        dispatch({
+          type: SEARCH_FOR_STORIES,
+          payload: { ...storySearchResponse.data, found: true },
+        });
+      } else {
+        dispatch({
+          type: SEARCH_FOR_STORIES,
+          payload: {
+            ...storySearchResponse.data,
+            found: false,
+            query,
+            errorMessage: `No Stories Matching  `,
+          },
+        });
+      }
     } catch (error) {
       dispatch({
         type: SEARCH_FOR_STORIES,
-        payload: { success: false, message: "Unable to process request" },
+        payload: { found: false, errorMessage: "Unable To Process Request" },
       });
     }
   };
