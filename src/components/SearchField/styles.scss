@@ -1,3 +1,4 @@
+@import "../App/styles.scss";
 $round-border: 30px;
 
 .search-field {
@@ -9,6 +10,7 @@ $round-border: 30px;
     height: 40px;
     padding: 0px 90px 0px 20px;
     font-size: 16px;
+    color: $gray;
   }
 }
 .search-submit {
