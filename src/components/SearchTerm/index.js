@@ -5,7 +5,10 @@ import "./styles.scss";
 const SearchTerm = ({ searchTerm }) => {
   return (
     <li className="search-term">
-      <Link to={`/search?q=${encodeURIComponent(searchTerm)}`}>
+      <Link
+        className="search-term__link"
+        to={`/search?q=${encodeURIComponent(searchTerm)}`}
+      >
         {searchTerm}
       </Link>
     </li>
