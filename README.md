@@ -23,6 +23,7 @@ Start the program in development mode:
 ```sh
 npm start
 ```
+
 <br>
 
 ## Features
@@ -36,14 +37,8 @@ npm start
 
 <br>
 
-### Search Stories
-
-<br>
-
 ![Search](https://i.imgur.com/ViJsV3A.png)
 <br>
-
-### Search History
 
 <br>
 
