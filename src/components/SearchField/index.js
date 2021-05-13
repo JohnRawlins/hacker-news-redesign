@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector, shallowEqual } from "react-redux";
+import { useLocation, useHistory } from "react-router-dom";
 import * as searchActions from "../../redux/actions/search";
 import SearchHistoryContainer from "../SearchHistoryContainer";
 import searchIcon from "./assets/search-icon.svg";
@@ -7,6 +8,9 @@ import "./styles.scss";
 
 const SearchField = () => {
   const dispatch = useDispatch();
+  const location = useLocation();
+  const history = useHistory();
+
   const [searchFieldInput, setSearchFieldInput] = useState("");
   const { searchHistory, isSearchFormSubmitted } = useSelector(
     (state) => state,
@@ -34,8 +38,17 @@ const SearchField = () => {
       );
     }
     dispatch(searchActions.setSearchFormSubmission(true));
-    dispatch(searchActions.searchForStories(searchFieldInput));
+    history.push(`/search?q=${encodeURIComponent(searchFieldInput)}`);
   };
+
+  useEffect(() => {
+    if (location.pathname !== "/") {
+      const queryTerm = location.search.slice(3);
+      dispatch(searchActions.setSearchFormSubmission(true));
+      dispatch(searchActions.searchForStories(queryTerm));
+      setSearchFieldInput(decodeURIComponent(queryTerm));
+    }
+  }, [dispatch, location.search, location.pathname]);
 
   return (
     <form className="search-field" onSubmit={handleSubmit}>
