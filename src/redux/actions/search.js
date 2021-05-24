@@ -2,6 +2,7 @@ import axios from "axios";
 export const ADD_TERM_TO_SEARCH_HISTORY = "ADD_TERM_TO_SEARCH_HISTORY";
 export const SET_SEARCH_FORM_SUBMISSION = "SET_SEARCH_FORM_SUBMISSION";
 export const SEARCH_FOR_STORIES = "SEARCH_FOR_STORIES";
+export const SET_SEARCH_FIELD_INPUT = "SET_SEARCH_FIELD_INPUT";
 
 export const addTermToSearchHistory = (searchTerm) => {
   return {
@@ -49,5 +50,12 @@ export const searchForStories = (userQuery) => {
         payload: { found: false, errorMessage: "Unable To Process Request" },
       });
     }
+  };
+};
+
+export const setSearchFieldInput = (searchTerm) => {
+  return {
+    type: SET_SEARCH_FIELD_INPUT,
+    payload: searchTerm,
   };
 };

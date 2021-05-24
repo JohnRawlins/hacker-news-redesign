@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import { useDispatch, useSelector, shallowEqual } from "react-redux";
 import { useLocation, useHistory } from "react-router-dom";
 import * as searchActions from "../../redux/actions/search";
@@ -11,11 +11,10 @@ const SearchField = () => {
   const location = useLocation();
   const history = useHistory();
 
-  const [searchFieldInput, setSearchFieldInput] = useState("");
-  const { searchHistory, isSearchFormSubmitted } = useSelector(
-    (state) => state,
-    shallowEqual
-  );
+  const { searchHistory, isSearchFormSubmitted, searchFieldInput } =
+    useSelector((state) => state, shallowEqual);
+
+  const isComponentMounted = useRef(false);
 
   const isDuplicateSearchTerm = (term) => {
     return searchHistory.includes(term.toLowerCase());
@@ -26,7 +25,7 @@ const SearchField = () => {
       dispatch(searchActions.setSearchFormSubmission(false));
     }
     const userInput = event.target.value;
-    setSearchFieldInput(userInput);
+    dispatch(searchActions.setSearchFieldInput(userInput));
   };
 
   const handleSubmit = (event) => {
@@ -38,17 +37,21 @@ const SearchField = () => {
       );
     }
     dispatch(searchActions.setSearchFormSubmission(true));
+    dispatch(searchActions.searchForStories(searchFieldInput));
     history.push(`/search?q=${encodeURIComponent(searchFieldInput)}`);
   };
 
   useEffect(() => {
-    if (location.pathname !== "/") {
+    if (!isComponentMounted.current && location.pathname !== "/") {
+      isComponentMounted.current = true;
       const queryTerm = location.search.slice(3);
       dispatch(searchActions.setSearchFormSubmission(true));
       dispatch(searchActions.searchForStories(queryTerm));
-      setSearchFieldInput(decodeURIComponent(queryTerm));
+      dispatch(
+        searchActions.setSearchFieldInput(decodeURIComponent(queryTerm))
+      );
     }
-  }, [dispatch, location.search, location.pathname]);
+  }, [dispatch, location.pathname, location.search]);
 
   return (
     <form className="search-field" onSubmit={handleSubmit}>
