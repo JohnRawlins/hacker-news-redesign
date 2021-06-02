@@ -1,12 +1,12 @@
 import React from "react";
 import { Provider } from "react-redux";
 import store from "../../redux/store/store";
-import SearchField from "../SearchField";
 import { BrowserRouter as Router } from "react-router-dom";
+import SearchField from "../SearchField";
 import StoryContainer from "../StoryContainer/index";
 import "./styles.scss";
 
-function App() {
+const App = () => {
   return (
     <Provider store={store}>
       <Router>
@@ -22,6 +22,6 @@ function App() {
       </Router>
     </Provider>
   );
-}
+};
 
 export default App;
