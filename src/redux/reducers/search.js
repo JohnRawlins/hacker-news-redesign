@@ -2,12 +2,15 @@ import { ADD_TERM_TO_SEARCH_HISTORY } from "../actions/search";
 import { SET_SEARCH_FORM_SUBMISSION } from "../actions/search";
 import { SEARCH_FOR_STORIES } from "../actions/search";
 import { SET_SEARCH_FIELD_INPUT } from "../actions/search";
+import { SEARCH_START } from "../actions/search";
+import { SEARCH_END } from "../actions/search";
 
 const initialState = {
   searchHistory: [],
   searchResults: {},
   searchFieldInput: "",
   isSearchFormSubmitted: false,
+  isLoading: false,
 };
 
 const searchReducer = (state = initialState, action) => {
@@ -37,6 +40,20 @@ const searchReducer = (state = initialState, action) => {
       return {
         ...state,
         searchFieldInput: action.payload,
+      };
+    }
+
+    case SEARCH_START: {
+      return {
+        ...state,
+        isLoading: true,
+      };
+    }
+
+    case SEARCH_END: {
+      return {
+        ...state,
+        isLoading: false,
       };
     }
 
