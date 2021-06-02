@@ -1,0 +1,44 @@
+@import "../App/styles.scss";
+
+.paginator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 25px 0px;
+}
+
+.paginator-list {
+  display: flex;
+  justify-content: center;
+  align-self: center;
+  margin: 0px 20px;
+}
+
+.paginator-next,
+.paginator-prev {
+  &__img {
+    display: block;
+    width: 40px;
+  }
+}
+
+.page {
+  display: flex;
+  border: 2px solid $orange;
+  border-radius: 5px;
+
+  &:not(:last-child) {
+    margin-right: 10px;
+  }
+
+  &__link {
+    color: $gray;
+    padding: 10px;
+  }
+
+  &--current {
+    text-decoration: underline;
+    color: $gray;
+    font-weight: bold;
+  }
+}
