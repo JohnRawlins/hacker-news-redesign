@@ -11,6 +11,11 @@
   align-items: center;
 }
 
+.story-search-results {
+  display: flex;
+  flex-direction: column;
+}
+
 .story-query-error {
   &__term {
     font-weight: bold;
