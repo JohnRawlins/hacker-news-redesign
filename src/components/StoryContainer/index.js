@@ -1,6 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import Story from "../Story/index";
+import Paginator from "../Paginator/index";
 import "./styles.scss";
 import "../Story/styles.scss";
 
@@ -15,7 +16,12 @@ const StoryContainer = () => {
 
   if (searchResults.found === true) {
     const storyList = createStoryList(searchResults.hits);
-    return <ul className="story-container">{storyList}</ul>;
+    return (
+      <div className="story-search-results">
+        <ul className="story-container">{storyList}</ul>
+        <Paginator />
+      </div>
+    );
   } else if (searchResults.found === false) {
     return (
       <ul className="story-container story-container--error">
