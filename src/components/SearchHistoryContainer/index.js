@@ -1,9 +1,13 @@
 import React from "react";
-import { useSelector, shallowEqual } from "react-redux";
+import { useSelector, useDispatch, shallowEqual } from "react-redux";
+import * as searchActions from "../../redux/actions/search";
 import SearchTerm from "../SearchTerm";
+import { useOutsideClick } from "../../hooks/useOutsideClick";
 import "./styles.scss";
 
 const SearchHistoryContainer = () => {
+  const dispatch = useDispatch();
+  const { ref } = useOutsideClick(searchActions.hideSearchHistory, dispatch);
   const SEARCH_HISTORY_VISIBLE_LIMIT = 8;
   const { searchHistory, isSearchHistoryVisible, searchFieldInput } =
     useSelector((state) => state, shallowEqual);
@@ -37,7 +41,11 @@ const SearchHistoryContainer = () => {
   ) {
     return null;
   } else {
-    return <ul className="search-history-container">{searchHistoryList}</ul>;
+    return (
+      <ul ref={ref} className="search-history-container">
+        {searchHistoryList}
+      </ul>
+    );
   }
 };
 
