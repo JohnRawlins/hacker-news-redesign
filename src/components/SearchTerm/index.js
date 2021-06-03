@@ -9,7 +9,7 @@ const SearchTerm = ({ searchTerm }) => {
   const history = useHistory();
   const handleClick = ({ target }) => {
     const searchTerm = target.textContent;
-    dispatch(searchActions.setSearchFormSubmission(true));
+    dispatch(searchActions.hideSearchHistory());
     dispatch(searchActions.searchForStories(searchTerm));
     dispatch(searchActions.setSearchFieldInput(searchTerm));
     history.push(`/search?q=${encodeURIComponent(searchTerm)}`);

@@ -5,18 +5,13 @@ export const SEARCH_FOR_STORIES = "SEARCH_FOR_STORIES";
 export const SET_SEARCH_FIELD_INPUT = "SET_SEARCH_FIELD_INPUT";
 export const SEARCH_START = "SEARCH_START";
 export const SEARCH_END = "SEARCH_END";
+export const SHOW_SEARCH_HISTORY = "SHOW_SEARCH_HISTORY";
+export const HIDE_SEARCH_HISTORY = "HIDE_SEARCH_HISTORY";
 
 export const addTermToSearchHistory = (searchTerm) => {
   return {
     type: ADD_TERM_TO_SEARCH_HISTORY,
     payload: searchTerm,
-  };
-};
-
-export const setSearchFormSubmission = (value) => {
-  return {
-    type: SET_SEARCH_FORM_SUBMISSION,
-    payload: value,
   };
 };
 
@@ -29,6 +24,18 @@ export const searchStart = () => {
 export const searchEnd = () => {
   return {
     type: SEARCH_END,
+  };
+};
+
+export const showSearchHistory = () => {
+  return {
+    type: SHOW_SEARCH_HISTORY,
+  };
+};
+
+export const hideSearchHistory = () => {
+  return {
+    type: HIDE_SEARCH_HISTORY,
   };
 };
 

@@ -12,7 +12,7 @@ const SearchField = () => {
   const location = useLocation();
   const history = useHistory();
 
-  const { searchHistory, isSearchFormSubmitted, searchFieldInput, isLoading } =
+  const { searchHistory, isSearchHistoryVisible, searchFieldInput, isLoading } =
     useSelector((state) => state, shallowEqual);
 
   const isComponentMounted = useRef(false);
@@ -22,8 +22,8 @@ const SearchField = () => {
   };
 
   const handleChange = (event) => {
-    if (isSearchFormSubmitted) {
-      dispatch(searchActions.setSearchFormSubmission(false));
+    if (!isSearchHistoryVisible) {
+      dispatch(searchActions.showSearchHistory());
     }
     const userInput = event.target.value;
     dispatch(searchActions.setSearchFieldInput(userInput));
@@ -37,7 +37,7 @@ const SearchField = () => {
         searchActions.addTermToSearchHistory(searchFieldInput.toLowerCase())
       );
     }
-    dispatch(searchActions.setSearchFormSubmission(true));
+    dispatch(searchActions.hideSearchHistory());
     dispatch(searchActions.searchForStories(searchFieldInput));
     history.push(`/search?q=${encodeURIComponent(searchFieldInput)}`);
   };
@@ -51,7 +51,7 @@ const SearchField = () => {
       const queryTerm = searchParams.get("q");
       const pageNum = searchParams.get("page");
       if (queryTerm) {
-        dispatch(searchActions.setSearchFormSubmission(true));
+        dispatch(searchActions.showSearchHistory());
         dispatch(searchActions.searchForStories(queryTerm, pageNum));
         dispatch(
           searchActions.setSearchFieldInput(decodeURIComponent(queryTerm))
@@ -80,7 +80,7 @@ const SearchField = () => {
             />
           </button>
         </div>
-        <SearchHistoryContainer userInput={searchFieldInput} />
+        <SearchHistoryContainer />
       </form>
     </div>
   );
