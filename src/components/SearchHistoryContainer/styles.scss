@@ -9,10 +9,6 @@
   background-color: white;
   border: 1px solid $gray;
   border-radius: 10px;
-  padding: 10px;
   z-index: 1000;
-
-  li:not(:last-child) {
-    margin-bottom: 10px;
-  }
+  overflow: hidden;
 }
